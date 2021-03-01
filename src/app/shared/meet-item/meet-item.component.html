@@ -1,0 +1,8 @@
+<div class="meet">
+
+  {{ meet.date|date:' HH:mm'}}
+  <p class="meet__infos">
+    <span> {{ meet.patient.firstName }} {{ meet.patient.lastName }}</span>
+    <span>{{meet.subject}}</span>
+  </p>
+</div>

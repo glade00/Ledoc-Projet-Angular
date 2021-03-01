@@ -1,0 +1,68 @@
+<div class="intro">
+  <h1>Formulaire Patient</h1>
+
+  <h2 *ngIf="isEditMode">Modifier le patient</h2>
+  <button class="bouton_green" mat-raised-button color="primary" *ngIf="!isEditMode">Créer</button>
+  <button mat-raised-button color="primary" *ngIf="isEditMode">Modifier le client</button>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="fond__formulaire informations">
+    <h3>Informations</h3>
+    <mat-form-field>
+      <mat-label for="firstName">Nom</mat-label>
+      <input type="text" matInput formControlName="firstName" name="firstName" id="firstName" value="">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label for="lastName">Prénom</mat-label>
+      <input type="text" matInput formControlName="lastName" name="lastName" id="lastName" value="">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label for="height">Taille (en cm)</mat-label>
+      <input type="number" matInput formControlName="height" name="height" id="height" value="">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label for="weight">Poids (en kg)</mat-label>
+      <input type="number" matInput formControlName="weight" name="weight" id="weight" value="">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label for="date">Date du projet</mat-label>
+      <input matInput formControlName="date" name="date" id="date" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label for="bloodGroup">Groupe Sanguin</mat-label>
+      <mat-select name="bloodGroup" formControlName="bloodGroup" id="bloodGroup">
+        <mat-option value="1">A</mat-option>
+        <mat-option value="2">B</mat-option>
+        <mat-option value="3">O</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!--
+    <mat-form-field>
+      <mat-label for="document">Poids (en kg)</mat-label>
+      <input (change)="onFileSelected()" type="file" id="document">
+    </mat-form-field>
+    -->
+  </div>
+
+  <div class="fond__formulaire notes">
+    <h3>Notes</h3>
+    <mat-form-field>
+      <mat-label for="notes">Note</mat-label>
+      <textarea name="notes" matInput formControlName="notes" id="notes" cols="50" rows="10"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="fond__formulaire traitements">
+    <h3>Traitements</h3>
+
+
+  </div>
+
+
+</form>

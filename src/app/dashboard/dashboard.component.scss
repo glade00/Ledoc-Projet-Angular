@@ -1,0 +1,89 @@
+.rdv{
+  width: 55%;
+  background: #FFFFFF;
+border: 1px solid #E5E5E5;
+padding: 20px;
+border-radius: 10px;
+margin-right: 20px;
+margin-bottom: 40px;
+}
+.stats{
+  width: 30%;
+  background: #FFFFFF;
+border: 1px solid #E5E5E5;
+padding: 10px;
+border-radius: 10px;
+margin-bottom: 40px;
+
+}
+
+.dashboard{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.rdv__intro{
+  display: flex;
+  justify-content: space-between;
+}
+.rdv__intro h2{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+.rdv__intro h2 span{
+  font-size: 36px;
+}
+li,ul{
+  list-style: none;
+  padding-left: 0;
+}
+
+.list_infos{
+  margin-top: -20px;
+}
+.stats__infos{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+}
+.stats__infos li{
+  width: 31%;
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  align-items: center;
+  height: 100px;
+}
+.stats__infos li img{
+  margin-bottom: 8px;
+}
+.mat-tab-label, mat-tab-label,.mat-ripple,.mat-tab-label .mat-tab-label-content{
+
+}
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label  {
+  padding: 0;
+  min-width: 20px;
+  width: 25px;
+height: 25px;
+border-radius: 5px;
+margin-left: 10px;
+  }
+  ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active{
+border-bottom: none;
+background: rgba(89, 225, 247, 0.7);
+color: white;
+
+  }
+  ::ng-deep .mat-tab-list .mat-tab-labels{
+    display: flex;
+    justify-content: flex-end;
+  }
+  ::ng-deep .mat-tab-nav-bar, ::ng-deep .mat-tab-header{
+    border-bottom: 0;
+  }
+  ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label:focus { outline:none; }

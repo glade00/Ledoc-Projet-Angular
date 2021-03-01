@@ -1,0 +1,74 @@
+<div class="dashboard">
+
+  <div class="card rdv">
+    <div class="rdv__intro">
+      <h2><span>{{ stats_day.meeting}}</span>
+        Rendez-vous aujourd'hui</h2>
+      <a class="link" routerLink="tous_meets">Voir tous</a>
+
+    </div>
+    <ul class="list_infos">
+      <li *ngFor="let meet of meets">
+        <app-meet-item [meet]="meet"></app-meet-item>
+      </li>
+    </ul>
+  </div>
+  <div class="card stats">
+    <h2>Statistiques</h2>
+    <mat-tab-group class="list_infos">
+      <mat-tab label="1j" class="tabs__test">
+        <ul class="stats__infos">
+          <li><img src="/assets/img/stats/rdv.svg" alt=""> {{ stats_day.meeting}} <span>rendez-vous</span> </li>
+          <li><img src="/assets/img/stats/urgence.svg" alt=""> {{ stats_day.emergencies}} <span>urgences</span></li>
+          <li><img src="/assets/img/stats/video.svg" alt=""> {{ stats_day.videoMeeting}} <span>consultations
+              vidéo</span> </li>
+          <li><img src="/assets/img/stats/assistants.svg" alt=""> {{ stats_day.availablesAssits}}
+            <span>assistants</span>
+            disponibles</li>
+          <li><img src="/assets/img/stats/doc.svg" alt=""> {{ stats_day.orders}} <span>ordonnances</span> </li>
+          <li><img src="/assets/img/stats/call.svg" alt=""> {{ stats_day.missingCalls}} <span>appels manqués</span>
+          </li>
+        </ul>
+      </mat-tab>
+      <mat-tab label="7j"> {{ stats_week.meeting}} </mat-tab>
+      <mat-tab label="30j"> {{ stats_month.meeting}} </mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="card">
+    <h2>Les derniers patients</h2>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Prénom </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastIncome">
+        <th mat-header-cell *matHeaderCellDef> Dernière visite </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastIncome}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="motif">
+        <th mat-header-cell *matHeaderCellDef> Motif </th>
+        <td mat-cell *matCellDef="let element"> {{element.motif}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+    </table>
+  </div>
+</div>

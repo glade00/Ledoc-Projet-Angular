@@ -1,0 +1,56 @@
+/* Mise en page des formulaires*/
+h3{
+  width: 100%;
+  font-size: 18px;
+line-height: 21px;
+  padding-left: 15px;
+}
+.fond__formulaire{
+  background: white;
+  border: 1px solid grey;
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid #E5E5E5;
+border-radius: 5px;
+}
+mat-form-field{
+  width: max-content;
+  margin: 5px 15px;
+}
+mat-form-field input{
+  background: #FFFFFF;
+border: 1px solid #DADADA;
+border-radius: 5px;
+padding: 5px;
+margin: 0 10px;
+}
+.notes mat-form-field{
+  width: 100%;
+  margin: 0 15px;
+  margin-block: -1rem;
+}
+.notes mat-form-field textarea{
+  width: 100%;
+  border: none;
+background: rgba(229, 229, 229, 0.5);
+border-radius: 5px;
+}
+
+.intro{
+  display: flex;
+  width: 90%; 
+  justify-content: space-between;
+}
+
+.bouton_green{
+  background: #00E676;
+border-radius: 5px;
+color: white;
+font-size: 14px;
+padding: 2px 45px;
+height: 30px;
+line-height: 1;
+}

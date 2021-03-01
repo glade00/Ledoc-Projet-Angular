@@ -1,0 +1,33 @@
+.notes{
+  width: 50%;
+  margin: 5px 1%;
+}
+.notes mat-card-content{
+  background: rgba(229, 229, 229, 0.5);
+border-radius: 5px;
+height: 80%;
+}
+.informations{
+  width: 30%;
+  margin: 5px 1%;
+}
+div, .content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.documents, .traitements{
+  width: 84.5%;
+  margin: 1%;
+}
+.informations p{width: 100%;}
+.informations p span{
+width: 140px;
+display: inline-block;
+
+}
+h3{
+  padding: 0;
+  margin-left: -15px;
+}

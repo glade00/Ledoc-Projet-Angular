@@ -1,0 +1,64 @@
+<div class="content">
+  <h2>{{ patient.firstName }} {{ patient.lastName }}</h2>
+
+  <a mat-raised-button color="default" [routerLink]="['../', patient.id, 'edit']">Modifier</a>
+  <a mat-raised-button color="default">Appeler</a>
+
+  <button class="button__delete__patient" mat-button (click)="delete()">Supprimer</button>
+</div>
+
+<div class="content">
+
+  <mat-card class="card informations">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Informations</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p><span>Genre:</span> {{ patient.gender }}</p>
+      <p><span>Taille:</span> {{ patient.height }}</p>
+      <p><span>Poids:</span> {{ patient.weight }}</p>
+      <p><span>Allergies:</span> {{ patient.weight }}</p>
+      <p><span>Grupe sanguin:</span> {{ patient.bloodGroup }}</p>
+      <p><span>N° Sécu:</span> {{ patient.socialNumber }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card notes">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Notes</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p> {{ patient.notes }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card documents">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Documents</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input (change)="onFileSelected()" type="file" id="file">
+      <a [href]="pdfFilePath">Voir le pdf</a>
+
+      <pdf-viewer [src]="pdfFilePath" [render-text]="false" style="display: block;"></pdf-viewer>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card traitements">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Traitements</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+    </mat-card-content>
+  </mat-card>
+</div>
