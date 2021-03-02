@@ -11,6 +11,18 @@ export class PatientsService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getDrugs(): Observable<any> {
+    return this.httpClient.get('http://localhost:3000/dictionaries/drugs');
+  }
+  getPeriods(): Observable<any> {
+    return this.httpClient.get('http://localhost:3000/dictionaries/periods');
+  }
+  getRepeats(): Observable<any> {
+    return this.httpClient.get('http://localhost:3000/dictionaries/repeats');
+  }
+  getBloodgroups(): Observable<any> {
+    return this.httpClient.get('http://localhost:3000/dictionaries/bloodgroups');
+  }
   getPatients(): Observable<any> {
     return this.httpClient.get('http://localhost:3000/patients');
   }
@@ -20,7 +32,7 @@ export class PatientsService {
   }
 
   addPatient(data: Patient) {
-    return this.httpClient.post('http://localhost:3000/patient', data);
+    return this.httpClient.post('http://localhost:3000/patients', data);
   }
 
   updatePatient(id: string, patient: Patient): Observable<any> {

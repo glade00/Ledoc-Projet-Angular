@@ -30,8 +30,34 @@
           </li>
         </ul>
       </mat-tab>
-      <mat-tab label="7j"> {{ stats_week.meeting}} </mat-tab>
-      <mat-tab label="30j"> {{ stats_month.meeting}} </mat-tab>
+      <mat-tab label="7j">
+        <ul class="stats__infos">
+          <li><img src="/assets/img/stats/rdv.svg" alt=""> {{ stats_week.meeting}} <span>rendez-vous</span> </li>
+          <li><img src="/assets/img/stats/urgence.svg" alt=""> {{ stats_week.emergencies}} <span>urgences</span></li>
+          <li><img src="/assets/img/stats/video.svg" alt=""> {{ stats_week.videoMeeting}} <span>consultations
+              vidéo</span> </li>
+          <li><img src="/assets/img/stats/assistants.svg" alt=""> {{ stats_week.availablesAssits}}
+            <span>assistants</span>
+            disponibles</li>
+          <li><img src="/assets/img/stats/doc.svg" alt=""> {{ stats_week.orders}} <span>ordonnances</span> </li>
+          <li><img src="/assets/img/stats/call.svg" alt=""> {{ stats_week.missingCalls}} <span>appels manqués</span>
+          </li>
+        </ul>
+      </mat-tab>
+      <mat-tab label="30j">
+        <ul class="stats__infos">
+          <li><img src="/assets/img/stats/rdv.svg" alt=""> {{ stats_month.meeting}} <span>rendez-vous</span> </li>
+          <li><img src="/assets/img/stats/urgence.svg" alt=""> {{ stats_month.emergencies}} <span>urgences</span></li>
+          <li><img src="/assets/img/stats/video.svg" alt=""> {{ stats_month.videoMeeting}} <span>consultations
+              vidéo</span> </li>
+          <li><img src="/assets/img/stats/assistants.svg" alt=""> {{ stats_month.availablesAssits}}
+            <span>assistants</span>
+            disponibles</li>
+          <li><img src="/assets/img/stats/doc.svg" alt=""> {{ stats_month.orders}} <span>ordonnances</span> </li>
+          <li><img src="/assets/img/stats/call.svg" alt=""> {{ stats_month.missingCalls}} <span>appels manqués</span>
+          </li>
+        </ul>
+      </mat-tab>
     </mat-tab-group>
   </div>
   <div class="card">

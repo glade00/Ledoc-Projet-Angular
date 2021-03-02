@@ -22,13 +22,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
 import { PatientItemComponent } from './shared/patient-item/patient-item.component';
-import { PatientComponent } from './patient/patient.component';
+import { PatientComponent, DialogElementsExampleDialog } from './patient/patient.component';
 
 import { PatientsService } from './services/patients.service';
 import { VisitesService } from './services/visites.service';
 
 import { FormsModule, ReactiveFormsModule, FormArray } from '@angular/forms';
-import { PatientFormComponent } from './patient-form/patient-form.component';
+import { PatientFormComponent, DialogElementsFormDialog } from './patient-form/patient-form.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
@@ -54,6 +54,8 @@ import { MeetComponent } from './meet/meet.component';
     MeetItemComponent,
     MeetFormComponent,
     MeetComponent,
+    DialogElementsExampleDialog,
+    DialogElementsFormDialog
   ],
   imports: [
     BrowserModule,
@@ -83,6 +85,7 @@ import { MeetComponent } from './meet/meet.component';
   providers: [
     PatientsService,
     VisitesService,
+
   ],
   bootstrap: [AppComponent]
 

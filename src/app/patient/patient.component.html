@@ -43,8 +43,14 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <input (change)="onFileSelected()" type="file" id="file">
-      <a [href]="pdfFilePath">Voir le pdf</a>
+      <div *ngFor="let document of patient.documents">
+        <p> {{document.name}}
+        </p>
+      </div>
+      <p *ngFor=" let document of patient.documents"> {{document.name}} <a href="{{ document.extension}}">Voir le
+          pdf</a></p>
+
+      <input (change)="onFileSelected() " type="file" id="file">
 
       <pdf-viewer [src]="pdfFilePath" [render-text]="false" style="display: block;"></pdf-viewer>
 
@@ -59,6 +65,12 @@
     </mat-card-header>
     <mat-card-content>
 
+      <div *ngFor="let traetment of patient.treatments">
+        <p> {{traetment.drug}} le {{traetment.repeat}} pendant {{traetment.duration}}
+        </p>
+      </div>
+      <button mat-button mat-raised-button color="secondary" class="button_ajout_traitement"
+        (click)="openDialog()">Ajouter un traitement</button>
     </mat-card-content>
   </mat-card>
 </div>

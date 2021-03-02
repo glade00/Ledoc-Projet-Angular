@@ -1,5 +1,8 @@
+import { DocumentsPatient } from './documentspatients';
+import { TreatmentsPatient } from './treatments-patient';
+
 export interface Patient {
-  id: Number;
+  id: String;
   firstName: String;
   lastName: String;
   gender?: String;
@@ -9,7 +12,8 @@ export interface Patient {
   bloodGroup?: Number;
   socialNumber?: String;
   notes?: String;
-  description?: String;
   date?: String;
   lastSubject?: String;
+  documents?: [DocumentsPatient];
+  treatments?: [TreatmentsPatient];
 }

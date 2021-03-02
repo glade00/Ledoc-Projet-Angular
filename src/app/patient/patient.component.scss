@@ -31,3 +31,14 @@ h3{
   padding: 0;
   margin-left: -15px;
 }
+.traitement__form{
+  display: flex;
+  flex-direction: column;
+}
+.traitement__form input{
+  margin: 10px;
+}
+.button_ajout_traitement{
+  min-width: 30%;
+  margin-left: 35%;
+}

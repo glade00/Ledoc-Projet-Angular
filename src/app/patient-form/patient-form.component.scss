@@ -22,9 +22,6 @@ mat-form-field{
 }
 mat-form-field input{
   background: #FFFFFF;
-border: 1px solid #DADADA;
-border-radius: 5px;
-padding: 5px;
 margin: 0 10px;
 }
 .notes mat-form-field{
@@ -53,4 +50,8 @@ font-size: 14px;
 padding: 2px 45px;
 height: 30px;
 line-height: 1;
+}
+
+.file-input {
+  display: none;
 }
