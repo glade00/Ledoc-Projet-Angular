@@ -1,10 +1,15 @@
-<div class="content">
-  <h2>{{ patient.firstName }} {{ patient.lastName }}</h2>
+<div class="content content__header">
+  <div>
+    <h2>{{ patient.firstName }} {{ patient.lastName }}</h2>
+  </div>
 
-  <a mat-raised-button color="default" [routerLink]="['../', patient.id, 'edit']">Modifier</a>
-  <a mat-raised-button color="default">Appeler</a>
+  <div class="div">
+    <a mat-raised-button class="button__default" color="default" [routerLink]="['../', patient.id, 'edit']">Modifier</a>
+    <a mat-raised-button class="button__default" color="default" href="tel:0123456789">Appeler</a>
 
-  <button class="button__delete__patient" mat-button (click)="delete()">Supprimer</button>
+    <button class="button__delete__patient" mat-button (click)="delete()">Archiver</button>
+  </div>
+
 </div>
 
 <div class="content">
@@ -19,8 +24,13 @@
       <p><span>Genre:</span> {{ patient.gender }}</p>
       <p><span>Taille:</span> {{ patient.height }}</p>
       <p><span>Poids:</span> {{ patient.weight }}</p>
-      <p><span>Allergies:</span> {{ patient.weight }}</p>
-      <p><span>Grupe sanguin:</span> {{ patient.bloodGroup }}</p>
+      <div *ngFor="let bloodGroup of bloodGroups">
+        <p *ngIf="bloodGroup.id == patient.bloodGroup"><span>Groupe sanguin:
+          </span>
+          {{ bloodGroup.label }}
+        </p>
+      </div>
+
       <p><span>N° Sécu:</span> {{ patient.socialNumber }}</p>
     </mat-card-content>
   </mat-card>
@@ -47,12 +57,24 @@
         <p> {{document.name}}
         </p>
       </div>
-      <p *ngFor=" let document of patient.documents"> {{document.name}} <a href="{{ document.extension}}">Voir le
-          pdf</a></p>
 
-      <input (change)="onFileSelected() " type="file" id="file">
 
-      <pdf-viewer [src]="pdfFilePath" [render-text]="false" style="display: block;"></pdf-viewer>
+      <form>
+        <div class="form-group">
+          <label for="file">File</label>
+          <input type="file" class="file-upload" onchange="console.log(event.target.files)">
+          <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+
+          <div class="file-upload">
+
+            {{fileName || "No file uploaded yet."}}
+
+            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+          </div>
+        </div>
+      </form>
 
     </mat-card-content>
   </mat-card>

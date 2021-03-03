@@ -7,6 +7,8 @@ import { PatientFormComponent } from './patient-form/patient-form.component';
 import { MeetsComponent } from './meets/meets.component';
 import { MeetFormComponent } from './meet-form/meet-form.component';
 import { MeetComponent } from './meet/meet.component';
+import { LoginComponent } from './login/login.component';
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 
 const routes: Routes = [
@@ -16,11 +18,18 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        canActivate: [AuthenticationGuard],
         component: DashboardComponent
       },
       {
         path: 'tous_meets',
+        canActivate: [AuthenticationGuard],
         component: MeetsComponent
+      },
+      {
+        path: 'nouveau_patient',
+        canActivate: [AuthenticationGuard],
+        component: PatientFormComponent
       },
 
     ]
@@ -30,24 +39,32 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        canActivate: [AuthenticationGuard],
         component: PatientsComponent
       },
       {
         path: 'nouveau',
+        canActivate: [AuthenticationGuard],
         component: PatientFormComponent
       },
       {
         path: ':id',
+        canActivate: [AuthenticationGuard],
         component: PatientComponent
       },
       {
         path: ':id/edit',
         component: PatientFormComponent,
+        canActivate: [AuthenticationGuard],
         data: {
           edit: true
         }
       },
     ]
+  },
+  {
+    path: 'connexion',
+    component: LoginComponent
   },
 
   {
@@ -55,18 +72,22 @@ const routes: Routes = [
     children: [
       {
         path: 'meets',
+        canActivate: [AuthenticationGuard],
         component: MeetsComponent
       },
       {
         path: 'nouveau',
+        canActivate: [AuthenticationGuard],
         component: MeetFormComponent
       },
       {
         path: ':id',
+        canActivate: [AuthenticationGuard],
         component: MeetComponent
       },
       {
         path: ':id/edit',
+        canActivate: [AuthenticationGuard],
         component: MeetFormComponent,
         data: {
           edit: true

@@ -1,3 +1,21 @@
+.content.content__header{
+  display: flex;
+  justify-content: space-between;
+  width: 86%;
+  padding: 0 15px;
+}
+.button__delete__patient{
+  background: #faa434;
+  color: white;
+  height: 35px;
+  margin-left: 20px;
+}
+.button__default{
+  background: #c7c7c7;
+  color: white;
+  height: 35px;
+  margin-left: 20px;
+}
 .notes{
   width: 50%;
   margin: 5px 1%;

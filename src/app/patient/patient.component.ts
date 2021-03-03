@@ -5,6 +5,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PatientsService } from '../services/patients.service';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { TreatmentsPatient } from '../models/treatments-patient';
+import { DocumentsPatient } from '../models/documentspatients';
+
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
@@ -18,15 +23,23 @@ export class PatientComponent implements OnInit {
   lastName: string;
   firstName: string;
   bloodGroup: any;
-  treatments: any;
+  treatments: TreatmentsPatient[];
+  form: any;
+  documents: DocumentsPatient[];
+  bloodGroups: any;
 
+  constructor(private http: HttpClient, private fb: FormBuilder, private patientsService: PatientsService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) { }
 
-
-  constructor(private patientsService: PatientsService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) { }
-
+  //bloodGroup
+  getBloodgroups() {
+    this.patientsService.getBloodgroups().subscribe(response => {
+      this.bloodGroups = response;
+    });
+  }
 
   ngOnInit(): void {
     this.getData();
+    this.getBloodgroups();
   }
 
   getData() {
@@ -35,18 +48,29 @@ export class PatientComponent implements OnInit {
     });
   }
 
-
-  onFileSelected() {
-    let $img: any = document.querySelector('#file');
-
-    if (typeof (FileReader) !== 'undefined') {
-      let reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        this.pdfFilePath = e.target.result;
+  fileName = '';
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.fileName = file.name;
+      var donneedocs: [{ name?: string, extension?: string, uploadAt?: Date }] = [{
+        name: file.name,
+        extension: 'http://localhost:4200/files/' + file.name,
+        uploadAt: new Date
+      }];
+      var concatDoc = this.patient.documents!.concat(donneedocs);
+      var patientLoad = {
+        id: this.id,
+        bloodGroup: this.patient.bloodGroup,
+        lastName: this.patient.lastName,
+        firstName: this.patient.firstName,
+        documents: concatDoc
       };
 
-      reader.readAsArrayBuffer($img.files[0]);
+      this.patientsService.updatePatient(this.route.snapshot.paramMap.get('id') || '', patientLoad).subscribe(response => {
+        window.location.reload()
+
+      });
     }
   }
 
@@ -145,11 +169,7 @@ export class DialogElementsExampleDialog {
   }
 
 
-
-
   submit() {
-    console.log('submitted', this.form.value);
-    console.log(this.data.id)
     var patientLoad = {
       id: this.data.id,
       bloodGroup: this.data.bloodGroup,
@@ -158,7 +178,7 @@ export class DialogElementsExampleDialog {
       treatments: this.data.treatments.concat(this.form.value),
     };
     this.patientsService.updatePatient(this.route.snapshot.paramMap.get(this.data.id) || this.data.id, patientLoad).subscribe(response => {
-
+      window.location.reload()
     });
   }
 

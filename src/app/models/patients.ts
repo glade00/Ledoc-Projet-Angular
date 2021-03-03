@@ -14,6 +14,6 @@ export interface Patient {
   notes?: String;
   date?: String;
   lastSubject?: String;
-  documents?: [DocumentsPatient];
-  treatments?: [TreatmentsPatient];
+  documents?: DocumentsPatient[];
+  treatments?: TreatmentsPatient[];
 }

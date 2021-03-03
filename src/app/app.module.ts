@@ -19,6 +19,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+
 import { MatCardModule } from '@angular/material/card';
 
 import { PatientItemComponent } from './shared/patient-item/patient-item.component';
@@ -28,7 +30,7 @@ import { PatientsService } from './services/patients.service';
 import { VisitesService } from './services/visites.service';
 
 import { FormsModule, ReactiveFormsModule, FormArray } from '@angular/forms';
-import { PatientFormComponent, DialogElementsFormDialog } from './patient-form/patient-form.component';
+import { PatientFormComponent } from './patient-form/patient-form.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
@@ -40,6 +42,13 @@ import { MeetsComponent } from './meets/meets.component';
 import { MeetItemComponent } from './shared/meet-item/meet-item.component';
 import { MeetFormComponent } from './meet-form/meet-form.component';
 import { MeetComponent } from './meet/meet.component';
+import { LoginComponent } from './login/login.component';
+
+
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { TokenStorageService } from './services/token-storage.service';
+import { AppInterceptor } from './services/app.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +64,7 @@ import { MeetComponent } from './meet/meet.component';
     MeetFormComponent,
     MeetComponent,
     DialogElementsExampleDialog,
-    DialogElementsFormDialog
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -77,14 +86,23 @@ import { MeetComponent } from './meet/meet.component';
     MatTabsModule,
     MatTableModule,
     MatDialogModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    PdfViewerModule
+    PdfViewerModule,
+    NgxWebstorageModule.forRoot(),
+
   ],
   providers: [
     PatientsService,
     VisitesService,
+    TokenStorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptor,
+      multi: true
+    }
 
   ],
   bootstrap: [AppComponent]

@@ -1,9 +1,15 @@
+<div class="header__content">
+  <h1>Nos patients</h1>
+  <a class="link button_ajout_patient" routerLink="nouveau">+</a>
+</div>
+
+
+
 <mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  <mat-label>Rechercher</mat-label>
+  <input appearance="outline" matInput (keyup)="applyFilter($event)" placeholder=" ex: Marie" #input>
 </mat-form-field>
 
-<a class="link" routerLink="nouveau">Ajouter un patient</a>
 
 <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
 

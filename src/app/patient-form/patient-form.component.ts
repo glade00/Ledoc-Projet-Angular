@@ -18,7 +18,18 @@ export class PatientFormComponent implements OnInit {
     id: number,
     label: ''
   }];
-
+  drugs: [{
+    id: '',
+    label: ''
+  }];
+  repeats: [{
+    id: '',
+    label: ''
+  }];
+  periods: [{
+    id: '',
+    label: ''
+  }];
   constructor(private dialog: MatDialog, private patientsService: PatientsService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
   fileName = '';
   onFileSelected(event: any) {
@@ -51,6 +62,9 @@ export class PatientFormComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.getBloodgroups();
+    this.getDrugs();
+    this.getPeriods();
+    this.getRepeats();
 
     this.isEditMode = this.route.snapshot.data.edit;
     if (this.route.snapshot.data.edit) {
@@ -68,49 +82,32 @@ export class PatientFormComponent implements OnInit {
       weight: [''],
       lastIncome: [''],
       bloodGroup: [''],
+      lastSubject: [''],
       socialNumber: [''],
       notes: [''],
-
-      documents: this.fb.array([])
-
-
+      treatments: this.fb.array([])
     });
   }
 
-
-  get documents(): FormArray {
-    return this.form.get('documents') as FormArray;
-  }
-  newDocument(): FormGroup {
-    return this.fb.group({
-      name: '',
-      extension: '',
-      uploadAt: ''
-    })
-  }
-
-  addDocument() {
-    this.documents.push(this.newDocument());
-  }
-
-
-  removeDocument(index: number) {
-    this.documents.removeAt(index);
-  }
-
-
   onSubmit() {
     if (this.isEditMode) {
+      this.form.value.bloodGroup = parseInt(this.form.value.bloodGroup);
       this.edit();
     } else {
-      parseInt(this.bloodGroup.value)
-
-      this.form.value.concat()
+      this.form.value.bloodGroup = parseInt(this.form.value.bloodGroup);
       this.add();
     }
   }
 
   add() {
+    this.form.value.treatments.map(obj => {
+      obj.drug = parseInt(obj.drug);
+      obj.duration = parseInt(obj.duration);
+      obj.repeat = parseInt(obj.repeat);
+
+    });
+    this.form.value.bloodGroup = parseInt(this.form.value.bloodGroup);
+
     this.patientsService.addPatient(this.form.value).subscribe(response => {
       this.router.navigate(['/patients']);
     });
@@ -127,47 +124,24 @@ export class PatientFormComponent implements OnInit {
       .getPatient(this.route.snapshot.paramMap.get('id') || '')
       .subscribe(response => {
         this.form.patchValue(response);
-        response.documents.forEach((document: any, index: number) => {
-          this.addDocument();
-          this.documents.at(index).patchValue(document);
+        response.treatments.forEach((treatment: any, index: number) => {
+          this.addTreatment();
+          this.treatments.at(index).patchValue(treatment);
         })
       });
   };
-
-
-  openDialog() {
-    this.dialog.open(DialogElementsFormDialog);
+  get treatments(): FormArray {
+    return this.form.get('treatments') as FormArray;
   }
 
-}
+  addTreatment() {
 
-@Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
-  styleUrls: ['./patient-form.component.scss']
-
-})
-export class DialogElementsFormDialog {
-
-  form: FormGroup;
-  isEdit = false;
-  drugs: [{
-    id: '',
-    label: ''
-  }];
-  repeats: [{
-    id: '',
-    label: ''
-  }];
-  periods: [{
-    id: '',
-    label: ''
-  }];
-  treatments: any;
-  constructor(private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private patientsService: PatientsService) { }
-
+    this.treatments.controls.push(this.fb.group({
+      drug: ['', Validators.required],
+      repeat: ['', Validators.required],
+      duration: ['', Validators.required],
+    }));
+  }
 
   getDrugs() {
     this.patientsService.getDrugs().subscribe(response => {
@@ -184,19 +158,6 @@ export class DialogElementsFormDialog {
       this.repeats = response;
     });
   }
-  ngOnInit(): void {
-    this.initForm();
-    this.getDrugs();
-    this.getPeriods();
-    this.getRepeats();
-
-
-    this.isEdit = this.route.snapshot.data.edit;
-    if (this.isEdit) {
-    }
-  }
-
-
   get drug(): FormControl {
     return this.form.get('drug') as FormControl;
   }
@@ -206,24 +167,5 @@ export class DialogElementsFormDialog {
   get duration(): FormControl {
     return this.form.get('duration') as FormControl;
   }
-
-  initForm() {
-    this.form = this.fb.group({
-      drug: ['', Validators.required],
-      repeat: ['', Validators.required],
-      duration: ['', Validators.required],
-
-    })
-  }
-
-
-
-
-  submit() {
-    console.log('submitted', this.form.value);
-
-
-  }
-
-
 }
+
