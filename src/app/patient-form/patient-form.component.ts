@@ -107,13 +107,20 @@ export class PatientFormComponent implements OnInit {
 
     });
     this.form.value.bloodGroup = parseInt(this.form.value.bloodGroup);
-
     this.patientsService.addPatient(this.form.value).subscribe(response => {
       this.router.navigate(['/patients']);
+
     });
+
   }
 
   edit() {
+    this.form.value.treatments.map(obj => {
+      obj.drug = parseInt(obj.drug);
+      obj.duration = parseInt(obj.duration);
+      obj.repeat = parseInt(obj.repeat);
+
+    });
     this.patientsService.updatePatient(this.route.snapshot.paramMap.get('id') || '', this.form.value).subscribe(response => {
       this.router.navigate(['/patients']);
     })
@@ -134,13 +141,21 @@ export class PatientFormComponent implements OnInit {
     return this.form.get('treatments') as FormArray;
   }
 
-  addTreatment() {
+  newTreatment(): FormGroup {
+    return this.fb.group({
+      drug: '',
+      repeat: '',
+      duration: ''
+    })
+  }
 
-    this.treatments.controls.push(this.fb.group({
-      drug: ['', Validators.required],
-      repeat: ['', Validators.required],
-      duration: ['', Validators.required],
-    }));
+  addTreatment() {
+    this.treatments.push(this.newTreatment());
+  }
+
+
+  removeTreatment(index) {
+    this.treatments.removeAt(index);
   }
 
   getDrugs() {

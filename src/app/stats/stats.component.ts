@@ -10,7 +10,11 @@ import { StatsService } from '../services/stats.service';
 export class StatsComponent implements OnInit {
 
   stats: Stat[] = [];
-
+  param = {
+    week: 'week',
+    month: 'month',
+    day: 'day'
+  };
   constructor(private statsService: StatsService) { }
 
   ngOnInit(): void {
@@ -19,19 +23,20 @@ export class StatsComponent implements OnInit {
     this.getStatsWeek();
   }
   getStatsWeek() {
-    this.statsService.getStatsWeek().subscribe(response => {
+    this.statsService.getStats(this.param.week).subscribe(response => {
       this.stats = response;
     });
   }
   getStatsMonth() {
-    this.statsService.getStatsMonth().subscribe(response => {
+    this.statsService.getStats(this.param.month).subscribe(response => {
       this.stats = response;
     });
   }
   getStatsDay() {
-    this.statsService.getStatsDay().subscribe(response => {
+    this.statsService.getStats(this.param.day).subscribe(response => {
       this.stats = response;
     });
   }
+
 
 }

@@ -55,3 +55,30 @@ line-height: 1;
 .file-input {
   display: none;
 }
+
+
+.form__treatments--element{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  color: #919191;
+}
+.form__treatments{
+  width: 100%;
+}
+
+.form__treatments--element .delete__treatment{
+  color: red;
+  margin-left: 10px;
+}
+.form__treatments--element
+select{
+  height: 30px;
+  border: 1px solid #221972;
+  border-radius: 10px;
+  margin: 0 5px;
+  width: 150px;
+  margin-right: 50px;
+}

@@ -8,13 +8,9 @@ import { Observable } from 'rxjs';
 export class StatsService {
 
   constructor(private httpClient: HttpClient) { }
-  getStatsDay(): Observable<any> {
-    return this.httpClient.get('http://localhost:3000/stats?period=day');
-  }
-  getStatsWeek(): Observable<any> {
-    return this.httpClient.get('http://localhost:3000/stats?period=week');
-  }
-  getStatsMonth(): Observable<any> {
-    return this.httpClient.get('http://localhost:3000/stats?period=month');
+
+  getStats(param: string): Observable<any> {
+    return this.httpClient.get('http://localhost:3000/stats?period=' + param);
+
   }
 }

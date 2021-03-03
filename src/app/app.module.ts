@@ -105,7 +105,8 @@ import { AppInterceptor } from './services/app.interceptor';
     }
 
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogElementsExampleDialog],
 
 })
 export class AppModule { }

@@ -27,6 +27,18 @@ export class PatientComponent implements OnInit {
   form: any;
   documents: DocumentsPatient[];
   bloodGroups: any;
+  drugs: [{
+    id: '',
+    label: ''
+  }];
+  repeats: [{
+    id: '',
+    label: ''
+  }];
+  periods: [{
+    id: '',
+    label: ''
+  }];
 
   constructor(private http: HttpClient, private fb: FormBuilder, private patientsService: PatientsService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) { }
 
@@ -36,10 +48,27 @@ export class PatientComponent implements OnInit {
       this.bloodGroups = response;
     });
   }
-
+  getDrugs() {
+    this.patientsService.getDrugs().subscribe(response => {
+      this.drugs = response;
+    });
+  }
+  getPeriods() {
+    this.patientsService.getPeriods().subscribe(response => {
+      this.periods = response;
+    });
+  }
+  getRepeats() {
+    this.patientsService.getRepeats().subscribe(response => {
+      this.repeats = response;
+    });
+  }
   ngOnInit(): void {
     this.getData();
     this.getBloodgroups();
+    this.getPeriods();
+    this.getRepeats();
+    this.getDrugs();
   }
 
   getData() {
@@ -92,6 +121,8 @@ export class PatientComponent implements OnInit {
     });
   }
 }
+
+
 @Component({
   selector: 'dialog-elements-example-dialog',
   templateUrl: 'dialog-elements-example-dialog.html',
@@ -170,6 +201,10 @@ export class DialogElementsExampleDialog {
 
 
   submit() {
+    this.form.value.drug = parseInt(this.form.value.drug);
+    this.form.value.duration = parseInt(this.form.value.duration);
+    this.form.value.repeat = parseInt(this.form.value.repeat);
+
     var patientLoad = {
       id: this.data.id,
       bloodGroup: this.data.bloodGroup,
@@ -177,6 +212,7 @@ export class DialogElementsExampleDialog {
       firstName: this.data.firstName,
       treatments: this.data.treatments.concat(this.form.value),
     };
+
     this.patientsService.updatePatient(this.route.snapshot.paramMap.get(this.data.id) || this.data.id, patientLoad).subscribe(response => {
       window.location.reload()
     });

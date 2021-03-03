@@ -6,7 +6,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Médicaments*</mat-label>
       <mat-select [formControl]="drug">
-        <mat-option value="{{drug.label}}" *ngFor="let drug of drugs">{{drug.label}}</mat-option>
+        <mat-option value="{{drug.id}}" *ngFor="let drug of drugs">{{drug.label}}</mat-option>
       </mat-select>
       <mat-hint align="end">Choisir le médicament</mat-hint>
     </mat-form-field>
@@ -14,7 +14,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Répétitions*</mat-label>
       <mat-select [formControl]="repeat">
-        <mat-option value="{{repeat.label}}" *ngFor="let repeat of repeats">{{repeat.label}}</mat-option>
+        <mat-option value="{{repeat.id}}" *ngFor="let repeat of repeats">{{repeat.label}}</mat-option>
       </mat-select>
       <mat-hint align="end">Choisir la répétition</mat-hint>
     </mat-form-field>
@@ -22,7 +22,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Durée*</mat-label>
       <mat-select [formControl]="duration">
-        <mat-option value="{{period.label}}" *ngFor="let period of periods">{{period.label}}
+        <mat-option value="{{period.id}}" *ngFor="let period of periods">{{period.label}}
         </mat-option>
       </mat-select>
       <mat-hint align="end">Choisir la durée</mat-hint>

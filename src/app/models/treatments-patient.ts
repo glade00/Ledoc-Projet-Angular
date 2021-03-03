@@ -1,5 +1,5 @@
 export interface TreatmentsPatient {
-  drug?: String;
-  repeat?: String;
-  duration?: String;
+  drug?: Number;
+  repeat?: Number;
+  duration?: Number;
 }
