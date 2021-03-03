@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PatientsService } from '../services/patients.service';
 import { MeetsService } from '../services/meets.service';
 import { StatsService } from '../services/stats.service';
 import { Patient } from '../models/patients';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-dashboard',
@@ -52,6 +54,7 @@ export class DashboardComponent implements OnInit {
     month: 'month',
     day: 'day'
   };
+  dataSource2: any;
   constructor(private statsService: StatsService, private patientsService: PatientsService, private meetsService: MeetsService) { }
 
   ngOnInit(): void {
@@ -65,7 +68,14 @@ export class DashboardComponent implements OnInit {
   getPatients() {
     this.patientsService.getPatients().subscribe(response => {
       this.dataSource = response;
+      this.dataSource2 = new MatTableDataSource(this.dataSource);
+
     });
+  }
+  @ViewChild(MatSort) sort: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource2.sort = this.sort;
   }
   getMeets() {
     this.meetsService.getMeets().subscribe(response => {

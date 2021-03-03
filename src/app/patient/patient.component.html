@@ -64,12 +64,12 @@
       <form>
         <div class="form-group">
           <label for="file">File</label>
-          <input type="file" class="file-upload" onchange="console.log(event.target.files)">
-          <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+          <input style="display: none;" type="file" class="file-upload" onchange="console.log(event.target.files)">
+          <input style="display: none;" type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
 
           <div class="file-upload">
 
-            {{fileName || "No file uploaded yet."}}
+            {{fileName || " : Pas de documents téléchargés."}}
 
             <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
               <mat-icon>attach_file</mat-icon>
